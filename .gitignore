@@ -338,7 +338,7 @@ media
 .vscode-test
 .vscode-test-web
 .DS_Store
-*.vsix
+# *.vsix
 package-lock.json
 src/@types/vscode.d.ts
 src/@types/vscode.proposed.d.ts
