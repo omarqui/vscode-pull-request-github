@@ -76,7 +76,7 @@ export class IssuesTreeData
 	}
 
 	private async getIssueTreeItem(element: IssueItem): Promise<vscode.TreeItem> {
-		const treeItem = new vscode.TreeItem(element.title, vscode.TreeItemCollapsibleState.None);
+		const treeItem = new vscode.TreeItem(`${element.number}: ${element.title}`, vscode.TreeItemCollapsibleState.None);
 		treeItem.iconPath = (await DataUri.avatarCirclesAsImageDataUris(this.context, [element.author], 16, 16))[0] ??
 			(element.isOpen
 				? new vscode.ThemeIcon('issues', new vscode.ThemeColor('issues.open'))
