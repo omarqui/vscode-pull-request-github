@@ -537,11 +537,6 @@ export class IssueFeatureRegistrar extends Disposable {
 				`@ext:${EXTENSION_ID} issues`,
 			);
 		}));
-		this._register(vscode.workspace.onDidChangeConfiguration(e => {
-			if (e.affectsConfiguration(`${PR_SETTINGS_NAMESPACE}.${SHOW_PULL_REQUEST_NUMBER_IN_TREE}`)) {
-				this.refreshView();
-			}
-		}));
 		this._stateManager.tryInitializeAndWait().then(() => {
 			this.registerCompletionProviders();
 
@@ -666,6 +661,10 @@ export class IssueFeatureRegistrar extends Disposable {
 							);
 						}
 						break;
+					}
+
+					if (change.affectsConfiguration(`${PR_SETTINGS_NAMESPACE}.${SHOW_PULL_REQUEST_NUMBER_IN_TREE}`)) {
+						this.refreshView();
 					}
 				}
 			}),
