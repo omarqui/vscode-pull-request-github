@@ -737,7 +737,7 @@
 				"githubIssues.showIssueNumberInTree": {
 					"type": "boolean",
 					"default": false,
-					"description": "%githubPullRequests.showIssueNumberInTree.description%"
+					"description": "%githubIssues.showIssueNumberInTree.description%"
 				},
 				"githubIssues.alwaysPromptForNewIssueRepo": {
 					"type": "boolean",
