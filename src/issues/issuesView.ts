@@ -14,7 +14,7 @@ import { issueMarkdown } from '../github/markdownUtils';
 import { RepositoriesManager } from '../github/repositoriesManager';
 import { issueBodyHasLink } from './issueLinkLookup';
 import { IssueItem, QueryGroup, StateManager } from './stateManager';
-import { ISSUES_SETTINGS_NAMESPACE, SHOW_ISSUE_NUMBER_IN_TREE } from '../common/settingKeys';
+import { PR_SETTINGS_NAMESPACE, SHOW_PULL_REQUEST_NUMBER_IN_TREE } from '../common/settingKeys';
 
 export class QueryNode {
 	constructor(
@@ -82,8 +82,8 @@ export class IssuesTreeData
 		let labelPrefix = '';
 		if (
 			vscode.workspace
-				.getConfiguration(ISSUES_SETTINGS_NAMESPACE)
-				.get<boolean>(SHOW_ISSUE_NUMBER_IN_TREE, false)
+				.getConfiguration(PR_SETTINGS_NAMESPACE)
+				.get<boolean>(SHOW_PULL_REQUEST_NUMBER_IN_TREE, false)
 		) {
 			labelPrefix = `#${element.number}: `;
 		}

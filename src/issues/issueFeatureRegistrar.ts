@@ -17,7 +17,8 @@ import {
 	ENABLED,
 	ISSUE_COMPLETIONS,
 	ISSUES_SETTINGS_NAMESPACE,
-	SHOW_ISSUE_NUMBER_IN_TREE,
+	PR_SETTINGS_NAMESPACE,
+	SHOW_PULL_REQUEST_NUMBER_IN_TREE,
 	USER_COMPLETIONS
 } from '../common/settingKeys';
 import { editQuery } from '../common/settingsUtils';
@@ -537,7 +538,7 @@ export class IssueFeatureRegistrar extends Disposable {
 			);
 		}));
 		this._register(vscode.workspace.onDidChangeConfiguration(e => {
-			if (e.affectsConfiguration(`${ISSUES_SETTINGS_NAMESPACE}.${SHOW_ISSUE_NUMBER_IN_TREE}`)) {
+			if (e.affectsConfiguration(`${PR_SETTINGS_NAMESPACE}.${SHOW_PULL_REQUEST_NUMBER_IN_TREE}`)) {
 				this.refreshView();
 			}
 		}));
