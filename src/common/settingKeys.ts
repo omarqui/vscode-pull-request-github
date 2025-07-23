@@ -24,6 +24,7 @@ export const CREATE_DRAFT = 'createDraft';
 export const QUICK_DIFF = 'quickDiff';
 export const SET_AUTO_MERGE = 'setAutoMerge';
 export const SHOW_PULL_REQUEST_NUMBER_IN_TREE = 'showPullRequestNumberInTree';
+export const SHOW_ISSUE_NUMBER_IN_TREE = 'showIssueNumberInTree';
 export const DEFAULT_MERGE_METHOD = 'defaultMergeMethod';
 export const DEFAULT_DELETION_METHOD = 'defaultDeletionMethod';
 export const SELECT_LOCAL_BRANCH = 'selectLocalBranch';

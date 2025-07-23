@@ -17,7 +17,8 @@ import {
 	ENABLED,
 	ISSUE_COMPLETIONS,
 	ISSUES_SETTINGS_NAMESPACE,
-	USER_COMPLETIONS,
+	SHOW_ISSUE_NUMBER_IN_TREE,
+	USER_COMPLETIONS
 } from '../common/settingKeys';
 import { editQuery } from '../common/settingsUtils';
 import { ITelemetry } from '../common/telemetry';
@@ -534,6 +535,11 @@ export class IssueFeatureRegistrar extends Disposable {
 				'workbench.action.openSettings',
 				`@ext:${EXTENSION_ID} issues`,
 			);
+		}));
+		this._register(vscode.workspace.onDidChangeConfiguration(e => {
+			if (e.affectsConfiguration(`${ISSUES_SETTINGS_NAMESPACE}.${SHOW_ISSUE_NUMBER_IN_TREE}`)) {
+				this.refreshView();
+			}
 		}));
 		this._stateManager.tryInitializeAndWait().then(() => {
 			this.registerCompletionProviders();

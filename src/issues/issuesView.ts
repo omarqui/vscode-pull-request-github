@@ -14,6 +14,7 @@ import { issueMarkdown } from '../github/markdownUtils';
 import { RepositoriesManager } from '../github/repositoriesManager';
 import { issueBodyHasLink } from './issueLinkLookup';
 import { IssueItem, QueryGroup, StateManager } from './stateManager';
+import { ISSUES_SETTINGS_NAMESPACE, SHOW_ISSUE_NUMBER_IN_TREE } from '../common/settingKeys';
 
 export class QueryNode {
 	constructor(
@@ -71,12 +72,22 @@ export class IssuesTreeData
 		return item;
 	}
 
+
+
 	private getIssueGroupItem(element: IssueGroupNode): vscode.TreeItem {
 		return new vscode.TreeItem(element.group, getQueryExpandState(this.context, element, element.isInFirstQuery ? vscode.TreeItemCollapsibleState.Expanded : vscode.TreeItemCollapsibleState.Collapsed));
 	}
 
 	private async getIssueTreeItem(element: IssueItem): Promise<vscode.TreeItem> {
-		const treeItem = new vscode.TreeItem(`${element.number}: ${element.title}`, vscode.TreeItemCollapsibleState.None);
+		let labelPrefix = '';
+		if (
+			vscode.workspace
+				.getConfiguration(ISSUES_SETTINGS_NAMESPACE)
+				.get<boolean>(SHOW_ISSUE_NUMBER_IN_TREE, false)
+		) {
+			labelPrefix = `#${element.number}: `;
+		}
+		const treeItem = new vscode.TreeItem(`${labelPrefix}${element.title}`, vscode.TreeItemCollapsibleState.None);
 		treeItem.iconPath = (await DataUri.avatarCirclesAsImageDataUris(this.context, [element.author], 16, 16))[0] ??
 			(element.isOpen
 				? new vscode.ThemeIcon('issues', new vscode.ThemeColor('issues.open'))
